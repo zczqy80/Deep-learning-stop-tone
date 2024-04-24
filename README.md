@@ -77,14 +77,39 @@ After comparison, it is found that the features of the four label audio are sign
 </p>
 
 ## Model
-This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
+As timeseries data, audio is often effectively processed by Recurrent Neural Networks (RNN) due to their capability for sequence learning and inherent memory. However, the model chosen for this project is a one-dimensional Convolutional Neural Network (1D-CNN). This decision was based on the nature of the audio being processed—four short-duration sounds with no logical or temporal interdependencies, which do not play to the strengths of RNNs. RNNs excel in applications where predictions rely on historical data continuity, possessing short-term memory to handle such tasks.
 
-*Tip: probably ~200 words and a diagram is usually good to describe your model!*
+In contrast, although the traditional CNN models are generally preferred for image processing, under one-dimensional conditions, the convolutional kernel of 1D-CNN model moves along the time axis, making it well-suited for tasks like audio processing. Moreover, the recognition in this project primarily depends on the inherent characteristics of the data rather than sequential relationships. Compared to RNN models, a 1D-CNN has fewer parameters and offers a quicker response time. Therefore, this project utilized the default 1D-CNN model provided by Edge Impulse.
+
+In the process of model training, it can be found that with the gradual increase of sample types, the accuracy of the model is gradually decreasing, and the loss is gradually increasing. However, this trend is not obvious and still within an acceptable range，which has been shown as follows:
+
+<p align="center">
+  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/babee73c-0fe8-457b-b1b0-ba3aee36e0f4">
+</p>
+
+It is also worth to point out that, in order to exclude the influence of environmental noise and background sound, this project refers to a part of the dataset in the teaching project provided by edge impulse to add the function of identifying noise and unknown to the model.
 
 ## Experiments
-What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
 
-*Tip: probably ~300 words and graphs and tables are usually good to convey your results!*
+In order to explore how to achieve better training effects, two training parameters were modified during the training process to obtain comparative results. The first modification was the change in the number of neurons in the convolutional layers, with variations of 4, 8, and 16 neurons. The results are shown in the table below：
+
+<p align="center">
+  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/cdce33b5-a0b4-4e28-ac9f-caecbbf71e16">
+</p>
+
+In this table, the vertical comparison unique optimal value is highlighted in green, and the unique worst value is highlighted in red. After comparison, it is evident that under the condition of having 4 neurons, the model achieves the fastest response time; however, the accuracy is significantly lower compared to the other two configurations. As the number of neurons increases, there is a gradual improvement in model accuracy, but at the cost of slower response times. After weighing the pros and cons, this project ultimately chose to use 8 neurons as the parameter. Compared to the maximum of 16 neurons, there is not much decline in the model's accuracy, but the response speed has been substantially improved.
+
+The second parameter that was changed was Dropout during training. The table of record results is shown below:
+
+<p align="center">
+  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/6976658d-c0ff-4654-8aa1-cf23629440cd">
+</p>
+
+From the above table, it can be seen that although there are differences among the three configurations, the majority of the numerical gaps are minimal, with the exception of the classification for "you know." It is evident that at a dropout rate of 0.25, the prediction accuracy for this category is over 10% higher than the other two models. Therefore, the dropout parameter was ultimately set to 0.25. The final parameter of this project model was 8 neurons and 0.25 dropout, the model behaves as follows:
+
+<p align="center">
+  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/34b24f26-a392-4e00-8cf2-4ecce88966e7">
+</p
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
