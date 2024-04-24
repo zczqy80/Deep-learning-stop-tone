@@ -30,15 +30,51 @@ This project follows a workflow similar to most deep learning projects and can b
 3. Hardware deployment and testing: The model trained on edge impulse will be deployed to the microcontroller, and the microcontroller's microphone will be used for audio sampling and recognition, and then combined with different usage scenarios and codes to output the results. The details of this process are as follows:
 
 <p align="center">
-  <img width=800" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/f4bbf57b-1955-4c3a-8b74-ba47d6a215d9">
+  <img width=800" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/1a0275ff-9644-45e1-a337-3e16a94b6397">
 </p>
 
 During deployment, screens were added to the hardware to visualize the recognition results and count. Two external buttons have also been added, allowing the user to pause the detection at any time or return the count to zero. This is for the convenience of the user, to switch target recount in different conversations, or to pause detection. The design makes the application easy to use.
 
 ## Data
-Describe what data sources you have used and any cleaning, wrangling or organising you have done. Including some examples of the data helps others understand what you have been working with.
+This project is designed to classify and detect three common filler words: "however," "I mean," "you know," as well as stop tone like "umm," "ahh," and "en," amounting to a total of four classes to be recognized. For each label, 125 audio samples were collected, with 100 used for the training set and 25 for the test set. Additionally, to verify the impact of different sampling methods on the detection results, different acquisition strategy were used for all four labels.
 
-*Tip: probably ~200 words and images of what the data 'looks like' are good!*
+Stop tone
+
+The acquisition of "stop tone" is carried out in the whole class, which includes various types of stop tones from multiple students. Its feature extraction distribution is relatively wide, as shown in the figure below:
+
+<p align="center">
+  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/050eff27-d49b-4320-bb44-698dde21c615">
+</p>
+
+You know
+
+For the audio dataset for "you know", similar to "stop tone", is also collected across the class. However, in order to verify the influence of bad samples on the recognition results, background noise is mixed in the acquisition process or the tone is deliberately strange. The distribution of its characteristics is relatively concentrated, but the mixed bad samples appear more prominent:
+
+<p align="center">
+  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/278f02db-33bc-4fe4-8bda-819f0aa125ce">
+</p>
+
+I mean
+
+Unlike the previous two, the audio for "I mean" comes solely from the author. Additionally, the intonation and voice were kept consistent throughout the sampling process. As a result, the feature distribution under this label is extremely concentrated:
+
+<p align="center">
+  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/363c9d1d-4f15-464c-aedf-ce19d63027f6">
+</p>
+
+However
+
+The sampling of "However" is also done by the author alone, but in the sampling process, the author uses a variety of different mood and intonation, and the result is that the feature distribution of the label is differentiated:
+
+<p align="center">
+  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/9aabe917-a79c-4dc3-9cb3-cfb84649aa58">
+</p>
+
+After comparison, it is found that the features of the four label audio are significantly different, so it is speculated that high accuracy training results can be obtained:
+
+<p align="center">
+  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/dc2d71c2-1f23-4067-b790-34cf860d88d5">
+</p>
 
 ## Model
 This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
