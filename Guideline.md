@@ -53,4 +53,16 @@ A sample run of the model exported from the tutorial and added to the arduino li
   <img width=600" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/efabe007-2fdb-49f6-a5ea-55d2ca5e7b9c">
 </p
 
-At this point, the training and deployment of the ai model were completed. It detects the presence of specific fillers and stop tone. But it can't count the number of times, so add a part of the code in the arduino, and an lcd display and two buttons. It realizes the statistics and zero of The Times, and the opening and closing of the detection function. the code has been upload.
+At this point, the training and deployment of the ai model were completed. It detects the presence of specific fillers and stop tone. But it can't count the number of times, so add a part of the code in the arduino, and an lcd display and two buttons. It realizes the statistics and zero of The Times, and the opening and closing of the detection function. the code has been upload. 
+
+The wire connecting between arduino and other hardware is shown as follows:
+
+<p align="center">
+  <img width=800" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/2b77d3ae-c7d6-44c5-b9d4-f4e6f2a7471e">
+</p
+
+If you are interested in how these two works or want to learn more about them, you can check out the author's other github project: https://github.com/zczqy80/Watch-dog, where they are explained in detail. In addition, the model file of the wooden outer packaging has also been uploaded.The final finished product of the project is shown in the following figure:
+
+<p align="center">
+  <img width="400" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/ad114cb5-8ca2-42db-9659-172653d3518d">
+</p>
