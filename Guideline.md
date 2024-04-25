@@ -1,11 +1,12 @@
 # Stop tone dectection project build guideline
 
-In this project, the Arduino Nano 33 BLE microcontroller is required as the physical endpoint device. Additionally, the Edge Impulse platform is used for sampling and training the model. The deep learning model try to realize the detection of the frequency of cohesive words
-and the stop tone in the speech during the speech which could be diviede into:"However", "I mean", "You know" and "Stop tone"(just like Umm, Ahh, enn).
+In this project, the Arduino Nano 33 BLE microcontroller is required as the physical endpoint device. Additionally, the Edge Impulse platform is used for sampling and training the model.
 
 <p align="center">
   <img width=600" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/120a4f97-afd9-43c0-b728-ec5ea3165135">
 </p
+
+The deep learning model try to realize the detection of the frequency of cohesive wordsand the stop tone in the speech during the speech which could be diviede into:"However", "I mean", "You know" and "Stop tone"(just like Umm, Ahh, enn).
 
 ## 1. Data acquisition and dataset
 
