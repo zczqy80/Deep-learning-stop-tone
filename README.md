@@ -10,7 +10,7 @@ link to Edge Impulse: https://studio.edgeimpulse.com/studio/363567
 In this project, based on the audio detection and the external physical enclosure containing the display screen and interactive buttons, the deep learning model realized the detection of the frequency of cohesive words and the stop tone in the speech during the speech.The detection output include pause tone detection and three common filler words. The overall appearance of the project is shown in the figure below：
 
 <p align="center">
-  <img width="450" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/ad114cb5-8ca2-42db-9659-172653d3518d">
+  <img width="400" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/ad114cb5-8ca2-42db-9659-172653d3518d">
 </p>
 
 In the figure above, "how" represents "however," "know" stands for "you know," "Mean" corresponds to "I mean," and "Stop" denotes a stop tone. The inspiration for this project came from a discussion with the professor, where it was identified that during speeches, some speakers may exhibit extended pauses or frequently use certain filler words, resulting in a lack of fluency. Therefore, based on the audio training recognition deep learning models mentioned in lectures 6 (Wilson, 2024), an Arduino Nano 33 BLE microcontroller was used for audio sampling and recognition. The data was manual sampled and recognized on the Edge Impulse platform, where the model training and deployment were also completed.
@@ -22,7 +22,7 @@ This project aims to assess the fluency of speeches or talks by detecting the fr
 This project follows a workflow similar to most deep learning projects and can be divided into three block, which has been shown as follows in the order of step:
 
 <p align="center">
-  <img width=800" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/1f396f8d-e43d-4e57-8d68-09445b980931">
+  <img width=550" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/1f396f8d-e43d-4e57-8d68-09445b980931">
 </p>
 
 1. Acquisition and classification of data: This project needs to sample and label the audio required for classification, and store it in the dataset.
@@ -30,7 +30,7 @@ This project follows a workflow similar to most deep learning projects and can b
 3. Hardware deployment and testing: The model trained on edge impulse will be deployed to the microcontroller, and the microcontroller's microphone will be used for audio sampling and recognition, and then combined with different usage scenarios and codes to output the results. The details of this process are as follows:
 
 <p align="center">
-  <img width=800" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/1a0275ff-9644-45e1-a337-3e16a94b6397">
+  <img width=550" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/1a0275ff-9644-45e1-a337-3e16a94b6397">
 </p>
 
 During deployment, screens were added to the hardware to visualize the recognition results and count. Two external buttons have also been added, allowing the user to pause the detection at any time or return the count to zero. This is for the convenience of the user, to switch target recount in different conversations, or to pause detection. The design makes the application easy to use.
@@ -73,7 +73,7 @@ The sampling of "However" is also done by the author alone, but in the sampling 
 After comparison, it is found that the features of the four label audio are significantly different, so it is speculated that high accuracy training results can be obtained:
 
 <p align="center">
-  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/dc2d71c2-1f23-4067-b790-34cf860d88d5">
+  <img width=600" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/dc2d71c2-1f23-4067-b790-34cf860d88d5">
 </p>
 
 ## Model
@@ -84,7 +84,7 @@ In contrast, although the traditional CNN models are generally preferred for ima
 In the process of model training, it can be found that with the gradual increase of sample types, the accuracy of the model is gradually decreasing, and the loss is gradually increasing. However, this trend is not obvious and still within an acceptable range，which has been shown as follows:
 
 <p align="center">
-  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/babee73c-0fe8-457b-b1b0-ba3aee36e0f4">
+  <img width=600" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/babee73c-0fe8-457b-b1b0-ba3aee36e0f4">
 </p>
 
 It is also worth to point out that, in order to exclude the influence of environmental noise and background sound (Edge Impulse, 2024), this project refers to a part of the dataset in the teaching project provided by edge impulse to add the function of identifying noise and unknown to the model.
@@ -118,7 +118,7 @@ The model is deployed on the Arduino Nano 33 BLE microcomputer and tested in Rea
 After the model is deployed, the data sent back to the port is displayed in the following format：
 
 <p align="center">
-  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/efabe007-2fdb-49f6-a5ea-55d2ca5e7b9c">
+  <img width=700" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/efabe007-2fdb-49f6-a5ea-55d2ca5e7b9c">
 </p
 
 The output of the model is correct as "noise" or "unknown" in noisy environments or when no specific vocabulary is detected. On this basis, the author and other students have carried out the filler words: "However","You know" & "I mean" and stop tone recognition tests on the model, and the results are shown as follows:
@@ -127,7 +127,11 @@ The output of the model is correct as "noise" or "unknown" in noisy environments
   <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/d62c6f87-546c-4273-9911-baf19bea5d07">
 </p
 
-The results from the table clearly demonstrate that the final recognition outcomes are heavily influenced by the acquisition strategies employed. In the case of the "Stop tone", which was collected from a wide range of samples, even students who did not participate in the training sample acquisition could be clearly identified. However, for "you know," where the training samples were polluted, the recognition rate was suboptimal under all condition. As for "I mean," which was solely sourced from the author, identification was only successful when the author deliberately replicated the intonation used during the training. Other volunteers were entirely unable to be recognized for "I mean." With "However," which had a variety of intonations but a single source, the author's samples could be easily identified, whereas other students had to mimic the author's intonation to be potentially recognized.
+The results from the table clearly demonstrate that the final recognition outcomes are heavily influenced by the acquisition strategies employed. 
+
+In the case of the "Stop tone", which was collected from a wide range of samples, even students who did not participate in the training sample acquisition could be clearly identified. However, for "you know," where the training samples were polluted, the recognition rate was suboptimal under all condition. 
+
+As for "I mean," which was solely sourced from the author, identification was only successful when the author deliberately replicated the intonation used during the training. Other volunteers were entirely unable to be recognized for "I mean." With "However," which had a variety of intonations but a single source, the author's samples could be easily identified, whereas other students had to mimic the author's intonation to be potentially recognized.
 
 The testing results are in line with the measures taken during the initial sampling, which confirms that it is crucial to avoid contamination of data during the sampling process and to collect a variety of sound sources to expand the breadth of recognition.
 
@@ -154,3 +158,4 @@ Yuhang lei
 25/04/2024
 
 Word count: 1636 (main text)
+
