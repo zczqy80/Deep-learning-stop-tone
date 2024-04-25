@@ -13,7 +13,7 @@ In this project, based on the audio detection and the external physical enclosur
   <img width="450" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/ad114cb5-8ca2-42db-9659-172653d3518d">
 </p>
 
-In the figure above, "how" represents "however," "know" stands for "you know," "Mean" corresponds to "I mean," and "Stop" denotes a stop tone. The inspiration for this project came from a discussion with the professor, where it was identified that during speeches, some speakers may exhibit extended pauses or frequently use certain filler words, resulting in a lack of fluency. Therefore, based on the audio training recognition deep learning models mentioned in lectures 6 and 7, an Arduino Nano 33 BLE microcontroller was used for audio sampling and recognition. The data was manual sampled and recognized on the Edge Impulse platform, where the model training and deployment were also completed.
+In the figure above, "how" represents "however," "know" stands for "you know," "Mean" corresponds to "I mean," and "Stop" denotes a stop tone. The inspiration for this project came from a discussion with the professor, where it was identified that during speeches, some speakers may exhibit extended pauses or frequently use certain filler words, resulting in a lack of fluency. Therefore, based on the audio training recognition deep learning models mentioned in lectures 6 (Wilson, 2024), an Arduino Nano 33 BLE microcontroller was used for audio sampling and recognition. The data was manual sampled and recognized on the Edge Impulse platform, where the model training and deployment were also completed.
 
 ## Research Question
 This project aims to assess the fluency of speeches or talks by detecting the frequency of stop tones and filler words in the speech, which can also be used to improve personal speaking habits.
@@ -77,9 +77,9 @@ After comparison, it is found that the features of the four label audio are sign
 </p>
 
 ## Model
-As timeseries data, audio is often effectively processed by Recurrent Neural Networks (RNN) due to their capability for sequence learning and inherent memory. However, the model chosen for this project is a one-dimensional Convolutional Neural Network (1D-CNN). This decision was based on the nature of the audio being processed—four short-duration sounds with no logical or temporal interdependencies, which do not play to the strengths of RNNs. RNNs excel in applications where predictions rely on historical data continuity, possessing short-term memory to handle such tasks.
+As timeseries data, audio is often effectively processed by Recurrent Neural Networks (RNN) due to their capability for sequence learning and inherent memory. However, the model chosen for this project is a one-dimensional Convolutional Neural Network (1D-CNN). This decision was based on the nature of the audio being processed—four short-duration sounds with no logical or temporal interdependencies, which do not play to the strengths of RNNs. RNNs excel in applications where predictions rely on historical data continuity, possessing short-term memory to handle such tasks (Sak, Senior and Beaufays, 2014).
 
-In contrast, although the traditional CNN models are generally preferred for image processing, under one-dimensional conditions, the convolutional kernel of 1D-CNN model moves along the time axis, making it well-suited for tasks like audio processing. Moreover, the recognition in this project primarily depends on the inherent characteristics of the data rather than sequential relationships. Compared to RNN models, a 1D-CNN has fewer parameters and offers a quicker response time. Therefore, this project utilized the default 1D-CNN model provided by Edge Impulse.
+In contrast, although the traditional CNN models are generally preferred for image processing, under one-dimensional conditions, the convolutional kernel of 1D-CNN model moves along the time axis, making it well-suited for tasks like audio processing. Moreover, the recognition in this project primarily depends on the inherent characteristics of the data rather than sequential relationships. Compared to RNN models, a 1D-CNN has fewer parameters and offers a quicker response time (Li et al., 2019). Therefore, this project utilized the default 1D-CNN model provided by Edge Impulse.
 
 In the process of model training, it can be found that with the gradual increase of sample types, the accuracy of the model is gradually decreasing, and the loss is gradually increasing. However, this trend is not obvious and still within an acceptable range，which has been shown as follows:
 
@@ -87,7 +87,7 @@ In the process of model training, it can be found that with the gradual increase
   <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/babee73c-0fe8-457b-b1b0-ba3aee36e0f4">
 </p>
 
-It is also worth to point out that, in order to exclude the influence of environmental noise and background sound, this project refers to a part of the dataset in the teaching project provided by edge impulse to add the function of identifying noise and unknown to the model.
+It is also worth to point out that, in order to exclude the influence of environmental noise and background sound (Edge Impulse, 2024), this project refers to a part of the dataset in the teaching project provided by edge impulse to add the function of identifying noise and unknown to the model.
 
 ## Experiments
 
@@ -111,29 +111,46 @@ From the above table, it can be seen that although there are differences among t
   <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/34b24f26-a392-4e00-8cf2-4ecce88966e7">
 </p
 
-## Results and Observations
-Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
+The model is deployed on the Arduino Nano 33 BLE microcomputer and tested in Real world.
 
-*Tip: probably ~300 words and remember images and diagrams bring results to life!*
+## Results and Observations
+
+After the model is deployed, the data sent back to the port is displayed in the following format：
+
+<p align="center">
+  <img width=500" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/efabe007-2fdb-49f6-a5ea-55d2ca5e7b9c">
+</p
+
+The output of the model is correct as "noise" or "unknown" in noisy environments or when no specific vocabulary is detected. On this basis, the author and other students have carried out the filler words: "However","You know" & "I mean" and stop tone recognition tests on the model, and the results are shown as follows:
+
+<p align="center">
+  <img width=750" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/d62c6f87-546c-4273-9911-baf19bea5d07">
+</p
+
+The results from the table clearly demonstrate that the final recognition outcomes are heavily influenced by the acquisition strategies employed. In the case of the "Stop tone", which was collected from a wide range of samples, even students who did not participate in the training sample acquisition could be clearly identified. However, for "you know," where the training samples were polluted, the recognition rate was suboptimal under all condition. As for "I mean," which was solely sourced from the author, identification was only successful when the author deliberately replicated the intonation used during the training. Other volunteers were entirely unable to be recognized for "I mean." With "However," which had a variety of intonations but a single source, the author's samples could be easily identified, whereas other students had to mimic the author's intonation to be potentially recognized.
+
+The testing results are in line with the measures taken during the initial sampling, which confirms that it is crucial to avoid contamination of data during the sampling process and to collect a variety of sound sources to expand the breadth of recognition.
+
+Additionally, in the process of adjusting the model parameters, the author made the following conjecture: as the number of neurons increases, accuracy would gradually improve, but the trade-off would be slower response times. When selecting parameters, a balance should be found between the two. The dropout value might not have a significant relationship with the accuracy of normal data and the speed of the response. However, in cases where the data is polluted, an appropriate dropout value could mitigate the negative impact on accuracy.
 
 ## Bibliography
-*If you added any references then add them in here using this format:*
+1. Edge Impulse, (2024). Keyword Spotting in Pre-built Datasets. [online] Available at: https://docs.edgeimpulse.com/docs/pre-built-datasets/keyword-spotting [Accessed 16 April 2024].
 
-1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
+2. Li, Y., Baidoo, C., Cai, T. and Kusi, G.A., (2019). Speech Emotion Recognition Using 1D CNN with No Attention. 2019 23rd International Computer Science and Engineering Conference (ICSEC), Phuket, Thailand, pp. 351-356. [online] Available at: https://doi.org/10.1109/ICSEC47112.2019.8974716. (Accessed: 22 April 2024)
 
-2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
+3. Sak, H., Senior, A.W. and Beaufays, F. (2014). Long short-term memory recurrent neural network architectures for large scale acoustic modeling. Proceedings of the 15th Annual Conference of the International Speech Communication Association (Interspeech 2014), [online] Available at: https://www.isca-archive.org/interspeech_2014/sak14_interspeech.pdf [Accessed 22 April 2024].
 
-*Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
+4. Wilson, D. (2024) 'DL4SN Week 6 Lecture slides: RPi CV + Edge Impulse + Brief', CASA0018: Deep Learning for Sensor Networks 23/24. University College London. [online] Available at: https://moodle.ucl.ac.uk/mod/resource/view.php?id=5418360 (Accessed: 22 April 2024)
 
-----
+
 
 ## Declaration of Authorship
 
-I, AUTHORS NAME HERE, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
+I, YUHANG LEI, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
 
 
-*Digitally Sign by typing your name here*
+Yuhang lei
 
-ASSESSMENT DATE
+25/04/2024
 
-Word count: 
+Word count: 1636 (main text)
