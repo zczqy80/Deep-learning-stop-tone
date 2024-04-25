@@ -50,6 +50,7 @@ After the model is trained, the deployment of the model can be found in this web
 A sample run of the model exported from the tutorial and added to the arduino library should look like this:
 
 <p align="center">
-  <img width=600" alt="image" src="">
+  <img width=600" alt="image" src="https://github.com/zczqy80/Deep-learning-stop-tone/assets/146266229/efabe007-2fdb-49f6-a5ea-55d2ca5e7b9c">
 </p
 
+At this point, the training and deployment of the ai model were completed. It detects the presence of specific fillers and stop tone. But it can't count the number of times, so add a part of the code in the arduino, and an lcd display and two buttons. It realizes the statistics and zero of The Times, and the opening and closing of the detection function. the code has been upload.
