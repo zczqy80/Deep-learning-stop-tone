@@ -47,5 +47,9 @@ The details and result of the selection of parameter are explained in the readme
 
 After the model is trained, the deployment of the model can be found in this web page:https://docs.edgeimpulse.com/docs/edge-impulse-studio/deployment. The trained model of this project has been upload.
 
+A sample run of the model exported from the tutorial and added to the arduino library should look like this:
 
+<p align="center">
+  <img width=600" alt="image" src="">
+</p
 
